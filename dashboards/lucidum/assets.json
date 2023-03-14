@@ -1,0 +1,273 @@
+{
+    "type": "DashboardV2SyncDefinition",
+    "name": "Lucidum Dashboard",
+    "description": "",
+    "title": "Lucidum Dashboard",
+    "theme": "Dark",
+    "topologyLabelMap": {
+        "data": {}
+    },
+    "refreshInterval": 0,
+    "timeRange": {
+        "type": "BeginBoundedTimeRange",
+        "from": {
+            "type": "RelativeTimeRangeBoundary",
+            "relativeTime": "-1d"
+        },
+        "to": null
+    },
+    "layout": {
+        "layoutType": "Grid",
+        "layoutStructures": [
+            {
+                "key": "panel4AA09FD9A41A4A4D",
+                "structure": "{\"height\":3,\"width\":24,\"x\":0,\"y\":0}"
+            },
+            {
+                "key": "panel38260F7188074B45",
+                "structure": "{\"height\":15,\"width\":12,\"x\":0,\"y\":12}"
+            },
+            {
+                "key": "panelDD029C638DA05B4A",
+                "structure": "{\"height\":15,\"width\":6,\"x\":18,\"y\":12}"
+            },
+            {
+                "key": "panel46683720AC46794C",
+                "structure": "{\"height\":9,\"width\":10,\"x\":14,\"y\":3}"
+            },
+            {
+                "key": "panelACD6C868BA364B4E",
+                "structure": "{\"height\":9,\"width\":8,\"x\":6,\"y\":3}"
+            },
+            {
+                "key": "panel0F633D4CA7F8A84F",
+                "structure": "{\"height\":15,\"width\":6,\"x\":12,\"y\":12}"
+            },
+            {
+                "key": "panelE841FF1B8A846A4A",
+                "structure": "{\"height\":9,\"width\":6,\"x\":0,\"y\":3}"
+            }
+        ]
+    },
+    "panels": [
+        {
+            "id": null,
+            "key": "panel4AA09FD9A41A4A4D",
+            "title": "Number of Unique Assets",
+            "visualSettings": "{\"general\":{\"mode\":\"singleValueMetrics\",\"type\":\"svp\"},\"series\":{},\"svp\":{\"label\":\"\",\"labelFontSize\":30,\"valueFontSize\":76,\"gauge\":{\"show\":false},\"sparkline\":{\"show\":false,\"color\":\"#8d79e8\"}}}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "_collector=Lucidum AND _source = \"Lucidum: Demo Dashboard\" | count_distinct(lucid_asset_name)",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": null,
+            "coloringRules": null,
+            "linkedDashboards": []
+        },
+        {
+            "id": null,
+            "key": "panel38260F7188074B45",
+            "title": "Top-n Risk Factors",
+            "visualSettings": "{\"series\":{},\"overrides\":[],\"axes\":{\"axisX\":{\"title\":\"Risk Factor\"},\"axisY\":{\"title\":\"Asset Count\"}},\"general\":{\"type\":\"column\",\"displayType\":\"default\",\"fillOpacity\":1,\"mode\":\"distribution\"},\"color\":{\"family\":\"Categorical Default\"}}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "(_collector=Lucidum AND _source=\"Lucidum: Demo Dashboard\")| parse regex field=Risk_Factors\"(?:\\[\\\"|,\\\"|^\\\")(?<riskfactor>[^\\\"]+)\" multi | count_distinct(lucid_asset_name) group by riskfactor | sort by _count_distinct",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": {
+                "type": "BeginBoundedTimeRange",
+                "from": {
+                    "type": "RelativeTimeRangeBoundary",
+                    "relativeTime": "-1w"
+                },
+                "to": null
+            },
+            "coloringRules": null,
+            "linkedDashboards": []
+        },
+        {
+            "id": null,
+            "key": "panelDD029C638DA05B4A",
+            "title": "Data Sources Contributing",
+            "visualSettings": "{\"title\":{\"fontSize\":14},\"axes\":{\"axisX\":{\"titleFontSize\":12,\"labelFontSize\":12},\"axisY\":{\"titleFontSize\":12,\"labelFontSize\":12}},\"series\":{},\"general\":{\"type\":\"table\",\"displayType\":\"default\",\"paginationPageSize\":100,\"fontSize\":12,\"mode\":\"distribution\"}}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "(_collector=Lucidum AND _source=\"Lucidum: Demo Dashboard\")\n| parse regex field=Data_Sources\"(?:\\[\\\"|,\\\"|^\\\")(?<datasource>[^\\\"]+)\" multi\n| count_distinct(lucid_asset_name) group by datasource",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": null,
+            "coloringRules": null,
+            "linkedDashboards": []
+        },
+        {
+            "id": null,
+            "key": "panel46683720AC46794C",
+            "title": "Asset Locations",
+            "visualSettings": "{\"title\":{\"fontSize\":14},\"axes\":{\"axisX\":{\"titleFontSize\":12,\"labelFontSize\":12},\"axisY\":{\"titleFontSize\":12,\"labelFontSize\":12}},\"series\":{},\"general\":{\"type\":\"pie\",\"displayType\":\"default\",\"fillOpacity\":1,\"startAngle\":270,\"innerRadius\":\"30%\",\"maxNumOfSlices\":10,\"mode\":\"distribution\"},\"legend\":{\"enabled\":true,\"verticalAlign\":\"right\",\"showAsTable\":true,\"wrap\":true},\"overrides\":[]}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "(_collector=Lucidum AND _source=\"Lucidum: Demo Dashboard\")| count_distinct(lucid_asset_name) group by location",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": null,
+            "coloringRules": null,
+            "linkedDashboards": []
+        },
+        {
+            "id": null,
+            "key": "panelACD6C868BA364B4E",
+            "title": "Departments",
+            "visualSettings": "{\"general\":{\"mode\":\"distribution\",\"type\":\"bar\"},\"series\":{},\"color\":{\"family\":\"Sequential 1\"},\"overrides\":[],\"axes\":{\"axisX\":{\"title\":\"Department\"},\"axisY\":{\"title\":\"Asset Count\"}}}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "(_collector=Lucidum AND _source=\"Lucidum: Demo Dashboard\")| parse regex field=Risk_Factors\"(?:\\[\\\"|,\\\"|^\\\")(?<riskfactor>[^\\\"]+)\" multi | count_distinct(lucid_asset_name) group by department | where !isBlank(department) | sort by _count_distinct",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": {
+                "type": "BeginBoundedTimeRange",
+                "from": {
+                    "type": "RelativeTimeRangeBoundary",
+                    "relativeTime": "-3d"
+                },
+                "to": null
+            },
+            "coloringRules": null,
+            "linkedDashboards": []
+        },
+        {
+            "id": null,
+            "key": "panel0F633D4CA7F8A84F",
+            "title": "Managers of Users with At-Risk Assets",
+            "visualSettings": "{\"general\":{\"mode\":\"distribution\",\"type\":\"bar\"},\"series\":{},\"color\":{\"family\":\"SET3\"},\"overrides\":[],\"axes\":{\"axisX\":{\"title\":\"Manager\"},\"axisY\":{\"title\":\"Asset Count\"}}}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "(_collector=Lucidum AND _source=\"Lucidum: Demo Dashboard\")| parse regex field=Risk_Factors\"(?:\\[\\\"|,\\\"|^\\\")(?<riskfactor>[^\\\"]+)\" multi | count_distinct(lucid_asset_name) group by manager | where !isBlank(manager) | sort by _count_distinct | limit 20",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": {
+                "type": "BeginBoundedTimeRange",
+                "from": {
+                    "type": "RelativeTimeRangeBoundary",
+                    "relativeTime": "-1w"
+                },
+                "to": null
+            },
+            "coloringRules": null,
+            "linkedDashboards": []
+        },
+        {
+            "id": null,
+            "key": "panelE841FF1B8A846A4A",
+            "title": "Assets by Risk Level (Daily)",
+            "visualSettings": "{\"series\":{},\"general\":{\"type\":\"column\",\"displayType\":\"stacked\",\"fillOpacity\":1,\"mode\":\"timeSeries\"},\"color\":{\"family\":\"Categorical Default\"},\"overrides\":[],\"axes\":{\"axisY\":{\"minimum\":1500}}}",
+            "keepVisualSettingsConsistentWithParent": true,
+            "panelType": "SumoSearchPanel",
+            "queries": [
+                {
+                    "transient": false,
+                    "queryString": "_collector=Lucidum AND _sourceCategory=Demo/Dash\n| timeslice 1d\n| count by _timeslice, risk_level\n| transpose row _timeslice column risk_level",
+                    "queryType": "Logs",
+                    "queryKey": "A",
+                    "metricsQueryMode": null,
+                    "metricsQueryData": null,
+                    "tracesQueryData": null,
+                    "spansQueryData": null,
+                    "parseMode": "Auto",
+                    "timeSource": "Message",
+                    "outputCardinalityLimit": 1000
+                }
+            ],
+            "description": "",
+            "timeRange": {
+                "type": "BeginBoundedTimeRange",
+                "from": {
+                    "type": "RelativeTimeRangeBoundary",
+                    "relativeTime": "-1w"
+                },
+                "to": null
+            },
+            "coloringRules": null,
+            "linkedDashboards": []
+        }
+    ],
+    "variables": [],
+    "coloringRules": []
+}
